@@ -1,6 +1,6 @@
-module.exports = (client, msg) => {
+module.exports = async (client, msg) => {
 	const guildSettings = require('../../models/guild');
-	let guild = guildSettings.findOne({ id: msg.channel.guild.id });
+	let guild = await guildSettings.findOne({ id: msg.channel.guild.id });
 	if (!guild) {
 		guild = new guildSettings({
 			id: msg.channel.guild.id,
