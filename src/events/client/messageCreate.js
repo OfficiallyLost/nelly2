@@ -19,7 +19,7 @@ module.exports = async (client, msg) => {
 	const prefix = guild.prefix || ';;';
 
 	if (!msg.content.startsWith(prefix) || !msg.channel.guild || msg.author.bot) return;
-   const args = message.content.slice(prefix.length).trim().split(/ +/g);
+	const args = msg.content.slice(prefix.length).trim().split(/ +/g);
 	const commandName = args.shift().toLowerCase();
 	const command =
 		client.commands.get(commandName) ||
