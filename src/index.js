@@ -30,7 +30,4 @@ fs.readdirSync('./events/').forEach((dir) => {
 	}
 });
 
-async function con() {
-	await client.connect();
-}
-con();
+client.connect().catch((e) => console.log(e));
