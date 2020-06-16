@@ -1,9 +1,10 @@
 module.exports = {
 	name: 'ping',
 	description: 'Get the bots latency',
+	cooldown: 2,
 
-	execute: (msg) => {
+	execute: async (msg) => {
 		const message = await msg.channel.createMessage('Pong?');
-		message.edit(`Pong! \`${message.creaedAt - msg.creaedAt}\``)
+		message.edit(`Pong! \`${message.creaedAt - msg.creaedAt}\``);
 	}
 };
