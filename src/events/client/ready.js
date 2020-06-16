@@ -3,10 +3,13 @@ module.exports = (client) => {
 	const channel = require('../../config/channels').bot;
 	client.createMessage(channel, {
 		embed: {
-			title: 'Bot is now online.',
-			footer: { text: 'timestamp' },
+			title: 'Online',
+			color: 3922790,
+			footer: {
+				text: 'Dev'
+			},
 			timestamp: new Date()
 		}
 	});
-	console.log('bots online my dudes');
+	console.log('Nelly is online');
 };
