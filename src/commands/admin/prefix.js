@@ -10,11 +10,8 @@ module.exports = {
 		else {
 			const setting = require('../../models/guild');
 			const guild = await setting.findOne({ id: msg.channel.guild.id });
-			if (args[0] === guild.prefix) return msg.channel.createMessage('That already is the guilds prefix.');
-			else {
-				await guild.updateOne({ prefix: args[0] });
-				msg.channel.createMessage(`Prefix has been changed to \`${args[0]}\`.`);
-			}
+			await guild.updateOne({ prefix: args[0] });
+			msg.channel.createMessage(`Prefix has been changed to \`${args[0]}\``).catch((e) => console.log(e));
 		}
 	}
 };
