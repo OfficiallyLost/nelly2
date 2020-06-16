@@ -3,7 +3,6 @@ const cooldowns = new eris.Collection();
 
 module.exports = async (client, msg) => {
 	const guildSettings = require('../../models/guild');
-	console.log(guildSettings);
 	let guild = await guildSettings.findOne({ id: msg.guildID });
 	if (!guild) {
 		guild = new guildSettings({
