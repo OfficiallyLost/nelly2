@@ -1,43 +1,65 @@
+const moment = require('moment-timezone');
+require('moment-duration-format');
+
 module.exports = {
 	name: 'whois',
 	description: 'get information about a specific member',
 	cooldown: 3,
 
 	execute: (msg, args, client) => {
-		const member = client.getMember(msg.channel.guild, args.join(' ')) || msg.member;
+
+		let status = {
+			"online": "Online",
+			"idle": "Idle",
+			"dnd": "Do Not Disturb",
+			"offline": "Offline",
+		  };
+
+		const member = client.users.get(args[0]) || msg.member;
+		const joinPos = msg.channel.guild.members.map(m => m).sort((a, b) => a.joinedAt - b.joinedAt).indexOf(member) + 1;
+
 		if (!member) return msg.channel.createMessage(`I could not find that member.`);
 		else
 			msg.channel.createMessage({
 				embed: {
-					author: { name: member.username, icon_url: member.avatarURL },
+					author: { 
+						name: member.discrim, 
+						icon_url: member.avatarURL 
+					},
+					thumbnail: { 
+						url: member.avatarURL, 
+					},
 					fields: [
 						{
-							name: 'Mention',
+							name: 'Username',
 							value: member.mention,
 							inline: true
 						},
-						{
-							name: 'Nickname',
-							value: member.nick ? member.nick : 'None',
-							inline: true
+						{	
+							name: 'Status',
+							value: status[member.status],
+							inline: true,
 						},
 						{
-							name: 'Game',
-							value: member.game ? member.game : 'None',
-							inline: true
+							name: 'Join Position',
+							value: joinPos,
+							inline: false,
 						},
 						{
-							name: 'Created At',
-							value: new Date(member.createdAt).toDateString(),
-							inline: true
+							name: 'Joined',
+							value: moment(member.joinedAt).tz("Europe/London").format("D MMMM YYYY h:mm:ss A"),
+							inline: false,
 						},
 						{
-							name: 'Joined At',
-							value: new Date(member.joinedAt).toDateString(),
-							inline: true
-						}
+							name: 'Registered',
+							value: moment(member.createdAt).tz("Europe/London").format("D MMMM YYYY h:mm:ss A"),
+							inline: false,
+						},
 					],
-					footer: { text: `ID: ${member.id}` }
+					footer: { 
+						text: `ID: ${member.id}` 
+					},
+					timestamp: new Date(),
 				}
 			});
 	}
