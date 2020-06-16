@@ -6,14 +6,16 @@ module.exports = async (client, msg) => {
 	let guild = await guildSettings.findOne({ id: msg.guildID });
 	if (!guild) {
 		guild = new guildSettings({
-			id: msg.channel.guild.id,
-			prefix: ';;'
+			id: msg.guildID,
+			prefix: ';;',
+			logs: {}
 		});
 		await guild.save().catch((e) => console.log(e));
 	} else {
 		guild.updateOne({
 			id: guild.id,
-			prefix: guild.prefix
+			prefix: guild.prefix,
+			logs: guild.logs
 		});
 	}
 
