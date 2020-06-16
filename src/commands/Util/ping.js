@@ -3,6 +3,7 @@ module.exports = {
 	description: 'Get the bots latency',
 
 	execute: (msg) => {
-		msg.channel.createMessage('pong bitch');
+		const message = await msg.channel.createMessage('Pong?');
+		message.edit(`Pong! \`${message.creaedAt - msg.creaedAt}\``)
 	}
 };
