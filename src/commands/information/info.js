@@ -1,3 +1,6 @@
+const moment = require('moment-timezone');
+require("moment-duration-format");
+
 module.exports = {
 	name: 'info',
 	description: 'View Nelly info',
@@ -5,10 +8,11 @@ module.exports = {
 
 execute: (msg, client) => {
 
+const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
+
 msg.channel.createMessage({
     embed: {
     title: 'Nelly',
-    thumbnail: client.user.dynamicAvatarURL,
     color: 16283903,
     fields: [
         {
@@ -42,21 +46,6 @@ msg.channel.createMessage({
     inline: true,
         },
         {
-    name: "Guilds", 
-    value: client.guilds.size.toLocaleString(), 
-    value: true,
-        },
-        {
-    name: "Channels", 
-    value: client.channels.size.toLocaleString(),
-    inline: true,
-        },
-        {
-    name: "Users", 
-    value: client.users.size.toLocaleString(), 
-    inline: true,
-        },
-        {
     name: "Memory", 
     value: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} / 1024 MB`, 
     inline: false,
@@ -68,7 +57,7 @@ msg.channel.createMessage({
         },
     ],
     footer: {
-        text: `Dev | Shard: ${client.shard} | PID: ${process.pid} | Uptime: ${duration}`
+        text: `Dev | PID: ${process.pid} | Uptime: ${duration}`
     }
 }
 })
