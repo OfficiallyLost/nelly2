@@ -5,4 +5,4 @@ const guild = new mongoose.Schema({
 	prefix: { type: String }
 });
 
-mongoose.model('guild', guild);
+module.exports = mongoose.model('guild', guild);
