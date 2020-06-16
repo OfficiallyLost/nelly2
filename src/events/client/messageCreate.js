@@ -26,21 +26,21 @@ module.exports = async (client, msg) => {
 		client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 	if (!command) return;
 	if (!cooldowns.has(command.name)) {
-		cooldowns.set(command.name, new Eris.Collection());
+		cooldowns.set(command.name, new eris.Collection());
 	}
 
 	const now = Date.now();
 	const timestamps = cooldowns.get(command.name);
 	const cooldownAmount = command.cooldown * 1000;
 
-	if (timestamps.has(message.author.id)) {
-		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+	if (timestamps.has(msg.author.id)) {
+		const expirationTime = timestamps.get(msg.author.id) + cooldownAmount;
 
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
-			return message.channel
-				.createMessage(
-					`${message.member.mention}, you're being rate limited! Please wait **${timeLeft.toFixed(
+			return msg.channel
+				.createmsg(
+					`${msg.member.mention}, you're being rate limited! Please wait **${timeLeft.toFixed(
 						2
 					)}** seconds before trying to use this command.`
 				)
@@ -55,6 +55,6 @@ module.exports = async (client, msg) => {
 		command.execute(msg, args, client);
 	} catch (e) {
 		console.log(e);
-		client.createMessage(require('../../config/channels'.error), `\`\`\`js\n${e}\n\`\`\``);
+		client.createmsg(require('../../config/channels'.error), `\`\`\`js\n${e}\n\`\`\``);
 	}
 };
