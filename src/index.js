@@ -19,7 +19,16 @@ fs.readdirSync('./commands/').forEach((dir) => {
 		require(`./commands/${dir}/${f}`);
 	});
 });
-client.loadEvents();
+
+fs.readdirSync('./events/').forEach((dir) => {
+	const events = fs.readdirSync(`./events/${dir}/`).filter((file) => file.endsWith('.js'));
+	for (let file of events) {
+		const evt = require(`./events/${dir}/${file}`);
+		const event = file.split('.')[0];
+		console.log(event);
+		client.on(event, evt.bind(null, client));
+	}
+});
 
 const con = async () => {
 	await client.connect();
