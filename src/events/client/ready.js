@@ -7,4 +7,5 @@ module.exports = (client) => {
 			timestamp: new Date()
 		}
 	});
+	console.log('bots online my dudes');
 };
