@@ -9,11 +9,12 @@ module.exports = async (client, msg) => {
 			id: msg.channel.guild.id,
 			prefix: ';;'
 		});
+		await guild.save().catch((e) => console.log(e));
 	} else {
-		guild = {
+		guild.updateOne({
 			id: guild.id,
 			prefix: guild.prefix
-		};
+		});
 	}
 
 	const prefix = guild.prefix || ';;';
