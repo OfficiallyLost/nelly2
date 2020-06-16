@@ -12,4 +12,5 @@ module.exports = (client) => {
 		}
 	});
 	console.log('Nelly is online');
+	client.editStatus({ name: ';;help', type: 2 });
 };
