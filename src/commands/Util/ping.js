@@ -5,6 +5,6 @@ module.exports = {
 
 	execute: async (msg) => {
 		const message = await msg.channel.createMessage('Pong?');
-		message.edit(`Pong! \`${message.creaedAt - msg.creaedAt}\``);
+		message.edit(`Pong! \`${message.createdAt - msg.createdAt}ms\``);
 	}
 };
