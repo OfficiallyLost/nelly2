@@ -3,7 +3,7 @@ module.exports = {
 	description: 'eval js code',
 	aliases: [ 'e' ],
 
-	execute: (msg, client) => {
+	execute: (msg, args) => {
 		const clean = (text) => {
 			if (typeof text === 'string')
 				return text
