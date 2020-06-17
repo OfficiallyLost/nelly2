@@ -17,7 +17,7 @@ module.exports = {
 							.replace(/@/g, '@' + String.fromCharCode(8203));
 					else return text;
 				};
-				msg.channel.createMessage(`\`\`\`js\n${clean(evaled)}\`\`\``);
+				msg.channel.createMessage(`\`\`\`js\n${clean(evaled)}\n\`\`\``);
 			} catch (err) {
 				msg.channel.createMessage({
 					embed: {
