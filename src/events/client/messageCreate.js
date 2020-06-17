@@ -42,7 +42,7 @@ module.exports = async (client, msg) => {
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
 			return msg.channel
-				.createmsg(
+				.createMessage(
 					`${msg.member.mention}, you're being rate limited! Please wait **${timeLeft.toFixed(
 						2
 					)}** seconds before trying to use this command.`
@@ -57,7 +57,6 @@ module.exports = async (client, msg) => {
 	try {
 		command.execute(msg, args, client);
 	} catch (e) {
-		console.log(e);
-		client.createmsg(require('../../config/channels'.error), `\`\`\`js\n${e}\n\`\`\``);
+		client.error(client, msg, e);
 	}
 };
