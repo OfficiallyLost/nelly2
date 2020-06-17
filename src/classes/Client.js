@@ -50,15 +50,24 @@ class Client extends eris.Client {
 
 	error(client, msg, error) {
 		client.createMessage(require('../config/channels').error, {
-			content: `<@!704676350493196318>\n\n**Guild:** ${msg.channel.guild
-				.name} (${msg.guildID})n**Caused By:** ${msg.author.username}#${msg.author.discriminator} (${msg.author
+			content: `<@&704676350493196318>\n\n**Guild:** ${msg.channel.guild
+				.name} (${msg.guildID})\n**Caused By:** ${msg.author.username}#${msg.author.discriminator} (${msg.author
 				.id})`,
 			embed: {
 				title: 'Error',
-				description: `\`\`\`js\n${error.stack.slice(0, 350)}\`\`\``
+				description: `\`\`\`js\n${error.slice(0, 350)}\`\`\``
 			}
 		});
-		console.log(erorr);
+		client.createMessage(require('../config/channels').console, {
+			content: `<@&704676350493196318>\n\n**Guild:** ${msg.channel.guild
+				.name} (${msg.guildID})\n**Caused By:** ${msg.author.username}#${msg.author.discriminator} (${msg.author
+				.id})`,
+			embed: {
+				title: 'Error',
+				description: `\`\`\`js\n${error.slice(0, 350)}\`\`\``
+			}
+		});
+		console.log(error);
 		msg.channel.createMessage(
 			`An error occured during the process of this command. If this issue persits, please contact support.`
 		);
