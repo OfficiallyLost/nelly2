@@ -1,14 +1,13 @@
 const db = require('./database/db');
 const fs = require('fs');
+const Client = require('./classes/Client');
+const client = new Client(require('./config/passwords').token);
 const eris = require('eris');
-const client = new eris.Client(require('./config/passwords').token);
-
+client.commands = new eris.Collection();
 db.then(() => console.log('connected to the database')).catch((e) => console.log(e));
-
 process.on('unhandledPromiseRejectionWarning', (e) => {
 	console.log(e);
 });
-client.commands = new eris.Collection();
 fs.readdirSync('./commands/').forEach((dir) => {
 	const commandFiles = fs.readdirSync(`./commands/${dir}/`).filter((file) => file.endsWith('.js'));
 	for (const file of commandFiles) {
@@ -29,5 +28,4 @@ fs.readdirSync('./events/').forEach((dir) => {
 		client.on(event, evt.bind(null, client));
 	}
 });
-
 client.connect().catch((e) => console.log(e));
