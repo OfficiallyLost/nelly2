@@ -57,6 +57,6 @@ module.exports = async (client, msg) => {
 	try {
 		command.execute(msg, args, client);
 	} catch (e) {
-		client.error(client, msg, e);
+		client.error(client, msg, e.stack);
 	}
 };
