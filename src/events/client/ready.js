@@ -6,7 +6,7 @@ module.exports = (client) => {
 			title: 'Online',
 			color: 3922790,
 			footer: {
-				text: 'Dev'
+				text: 'Alpha'
 			},
 			timestamp: new Date()
 		}
