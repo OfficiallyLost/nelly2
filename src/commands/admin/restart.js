@@ -1,14 +1,12 @@
 module.exports = {
 	name: 'restart',
 	description: 'Restart',
-	cooldown: 2,
-
+	aliases: [ 'r' ],
 	execute: async (msg, client) => {
 		const process = require(`child_process`);
 		const channel = require('../../config/channels').bot;
-		let owner = [ '475371795185139712', '254814547326533632', '322996242521260042' ];
-
-		if (!owner.includes(msg.author.id)) return;
+		const devs = require('../../config/users').devs;
+		if (!devs.includes(msg.author.id)) return;
 		await msg.channel.createMessage({
 			embed: {
 				description: '<a:gears:715984737163804752> Restarting'

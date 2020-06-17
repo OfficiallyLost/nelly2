@@ -12,7 +12,7 @@ module.exports = {
 			else return text;
 		};
 
-		let owner = [ '475371795185139712', '254814547326533632', '322996242521260042' ];
+		const owner = require('../../config/users').devs;
 		if (!owner.includes(msg.author.id))
 			try {
 				const code = args.join(' ');
