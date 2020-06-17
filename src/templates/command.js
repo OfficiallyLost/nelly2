@@ -10,7 +10,7 @@ module.exports = {
 		try {
 			msg.channel.createMessage('hi');
 		} catch (error) {
-			client.error(client, msg, error);
+			client.error(client, msg, error.stack);
 		}
 	}
 };
