@@ -1,7 +1,9 @@
 const db = require('./database/db');
 const fs = require('fs');
 const Client = require('./classes/Client');
-const client = new Client(require('./config/passwords').token);
+const client = new Client(require('./config/passwords').token, {
+	restMode: true
+});
 const eris = require('eris');
 client.commands = new eris.Collection();
 db.then(() => console.log('connected to the database')).catch((e) => console.log(e));
