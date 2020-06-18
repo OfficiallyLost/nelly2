@@ -18,7 +18,6 @@ module.exports = async (client, msg) => {
 			logs: guild.logs
 		});
 	}
-
 	const prefix = guild.prefix || ';;';
 
 	if (!msg.content.startsWith(prefix) || !msg.channel.guild || msg.author.bot) return;
@@ -31,7 +30,6 @@ module.exports = async (client, msg) => {
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new eris.Collection());
 	}
-
 	const now = Date.now();
 	const timestamps = cooldowns.get(command.name);
 	const cooldownAmount = command.cooldown * 1000;
@@ -55,6 +53,11 @@ module.exports = async (client, msg) => {
 	}
 
 	try {
+		if (
+			!require('../../config/users').staff.includes(msg.author.id) ||
+			!require('../../config/users').devs.includes('msg.author.id')
+		)
+			return;
 		command.execute(msg, args, client);
 	} catch (e) {
 		client.error(client, msg, e.stack);
