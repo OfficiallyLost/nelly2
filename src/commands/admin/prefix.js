@@ -2,6 +2,8 @@ module.exports = {
 	name: 'prefix',
 	description: 'Change the server prefix',
 	cooldown: 4,
+	aliases: [ 'setprefix', 'suffix' ],
+	examples: [ 'prefix ;;', 'prefix Nelly' ],
 
 	execute: async (msg, args) => {
 		if (!msg.member.permission.has('manageGuild'))
