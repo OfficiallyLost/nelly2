@@ -3,6 +3,7 @@ const cooldowns = new eris.Collection();
 
 module.exports = async (client, msg) => {
 	const guildSettings = require('../../models/guild');
+	const userSettings = require('../../models/member');
 	let guild = await guildSettings.findOne({ id: msg.guildID });
 	if (!guild) {
 		guild = new guildSettings({
@@ -18,6 +19,17 @@ module.exports = async (client, msg) => {
 			logs: guild.logs
 		});
 	}
+	let member = await userSettings.findOne({ id: msg.author.id });
+	if (!member) {
+		member = new userSettings({
+			id: msg.author.id,
+			afk: false
+		});
+		await member.save().catch((e) => console.log(e));
+	} else {
+		member.update();
+	}
+
 	const prefix = guild.prefix || ';;';
 
 	if (!msg.content.startsWith(prefix) || !msg.channel.guild || msg.author.bot) return;
