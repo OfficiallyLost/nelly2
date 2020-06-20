@@ -6,8 +6,8 @@ module.exports = {
 	cooldown: 2,
 
 	execute: async (msg, args, client) => {
-		const member = client.getMember(msg.channel.guild, args.join(' '));
 		if (!args.length) return msg.channel.createMessage('You need to provide a member to hug!');
+		const member = client.getMember(msg.channel.guild, args.join(' '));
 		if (!member)
 			return msg.channel.createMessage({
 				embed: {
@@ -30,11 +30,12 @@ module.exports = {
 			const r = await fetch('https://some-random-api.ml/animu/hug');
 			r.json().then((e) => {
 				msg.channel.createMessage({
+					content: member.mention,
 					embed: {
-						color: msg.member.displayColor,
-						description: `<@!${msg.author.id}> gave a big hug to <@!${member.id}>!`,
+						description: `<@!${msg.author.id}> gave a big hug to you!`,
 						image: { url: e.link },
-						timestamp: new Date()
+						timestamp: new Date(),
+						footer: { text: '💖' }
 					}
 				});
 			});
