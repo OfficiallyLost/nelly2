@@ -35,10 +35,19 @@ class Client extends eris.Client {
     * @param {String} search Where to search for the member, ie 'args[0], args.join(' ')'
     */
 	getMember(guild, search) {
-		guild.members.find((e) => e.id === search) ||
+		console.log(search);
+		return (
+			guild.members.find((e) => e.id === search) ||
 			guild.members.find((e) => e.mention === search) ||
+			guild.members.find((e) => e.nick === search) ||
+			guild.members.find((e) => `${e.username}#${e.discriminator}` === search) ||
 			guild.members.find((e) => e.username === search) ||
-			guild.members.find((e) => e.nick === search);
+			guild.members.find((e) => e.username === search.toLowerCase()) ||
+			guild.members.find((e) => e.nick === search.toLowerCase()) ||
+			guild.members.find((e) => e.username === search.toLowerCase()) ||
+			guild.members.find((e) => e.username.toLowerCase().startsWith(search.toLowerCase())) ||
+			guild.members.find((e) => e.nick && e.nick.toLowerCase().startsWith(search.toLowerCase()))
+		);
 	}
 
 	/**
