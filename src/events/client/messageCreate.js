@@ -54,8 +54,8 @@ module.exports = async (client, msg) => {
 
 	try {
 		if (
-			!require('../../config/users').staff.includes(msg.author.id) ||
-			!require('../../config/users').devs.includes('msg.author.id')
+			require('../../config/users').staff.includes(msg.author.id) ||
+			require('../../config/users').devs.includes('msg.author.id')
 		)
 			return;
 		command.execute(msg, args, client);
