@@ -1,6 +1,6 @@
 const db = require('./database/db');
 const fs = require('fs');
-const Client = require('./classes/Client');
+const Client = require('./classes/Client.ts');
 const client = new Client(require('./config/passwords').token, {
 	restMode: true
 });
