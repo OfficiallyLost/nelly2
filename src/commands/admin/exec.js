@@ -4,20 +4,17 @@ module.exports = {
 	aliases: [ 'exe' ],
 
 	execute: (msg, args, client) => {
-        const process = require(`child_process`);
+		const process = require(`child_process`);
 		const owner = require('../../config/users').devs;
-        if (owner.includes(msg.author.id))
-        return;
+		if (!owner.includes(msg.author.id)) return;
 
-        process.exec(args.join(' '), (error, stdout) => {
-            const outputType = error || stdout;
-            let output = outputType;
-            if (typeof outputType === 'object') {
-                output = inspect(outputType, {
-                    depth: getMaxDepth(outputType, args.join(' '))
-                });
-            }
-            return msg.channel.createMessage(`${output}`);
-        });
-    }
+		if (!args.length) return msg.channel.createMessage('do something');
+		else {
+			process.exec(args.join(' '), (error, stdout) => {
+				if (typeof output === 'object') {
+					output = inspect(output, { depth: 1 });
+				}
+			});
+		}
+	}
 };

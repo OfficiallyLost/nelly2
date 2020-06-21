@@ -1,4 +1,4 @@
-const { Member, Message, Guild, PrivateChannel, GroupChannel, Role, AnyGuildChannel } = require('eris');
+const { Guild } = require('eris');
 const eris = require('eris');
 class Client extends eris.Client {
 	constructor(token, options) {
@@ -39,8 +39,8 @@ class Client extends eris.Client {
 	 */
 	error(client, msg, error) {
 		client.createMessage(require('../config/channels').error, {
-			content: `<@&704676350493196318>\n\n**Guild:** ${msg.channel.Guild
-				.name} (${msg.GuildID})\n**Caused By:** ${msg.author.username}#${msg.author.discriminator} (${msg.author
+			content: `<@&704676350493196318>\n\n**Guild:** ${msg.channel.guild
+				.name} (${msg.guildID})\n**Caused By:** ${msg.author.username}#${msg.author.discriminator} (${msg.author
 				.id})`,
 			embed: {
 				title: 'Error',
@@ -48,8 +48,8 @@ class Client extends eris.Client {
 			}
 		});
 		client.createMessage(require('../config/channels').console, {
-			content: `<@&704676350493196318>\n\n**Guild:** ${msg.channel.Guild
-				.name} (${msg.GuildID})\n**Caused By:** ${msg.author.username}#${msg.author.discriminator} (${msg.author
+			content: `<@&704676350493196318>\n\n**Guild:** ${msg.channel.guild
+				.name} (${msg.guildID})\n**Caused By:** ${msg.author.username}#${msg.author.discriminator} (${msg.author
 				.id})`,
 			embed: {
 				title: 'Error',
