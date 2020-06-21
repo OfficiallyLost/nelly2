@@ -6,9 +6,19 @@ module.exports = {
 	description: 'View Nelly info',
 	cooldown: 2,
 
-	execute: (msg, client) => {
+	execute: async (msg, _, client) => {
 		const duration = moment.duration(client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
-
+		const { devs } = require('../../config/users');
+		let developers = [];
+		// devs.forEach(async (dev) => {
+		// 	console.log(dev);
+		// 	const user = client.getRESTUser(dev).then((e) => e);
+		// 	developers = user.username;
+		// });
+		for (const dev of devs) {
+			const user = await client.getRESTUser(dev).then((e) => e);
+			developers.push(user.username);
+		}
 		msg.channel.createMessage({
 			embed: {
 				title: 'Nelly',
@@ -20,8 +30,8 @@ module.exports = {
 						inline: true
 					},
 					{
-						name: 'Library',
-						value: `eris`,
+						name: 'Languages',
+						value: `JavaScript, TypeScript (Eris)`,
 						inline: true
 					},
 					{
@@ -51,8 +61,7 @@ module.exports = {
 					},
 					{
 						name: 'Developers',
-						value: `soda#0001\nMBroken#4688\nOfficiallyLost#3484`,
-						inline: false
+						value: developers.join('\n')
 					}
 				],
 				footer: {
