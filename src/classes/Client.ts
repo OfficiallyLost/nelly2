@@ -5,7 +5,6 @@ class Client extends eris.Client {
 		super(token, options);
 	}
 	/**
-	 * 
 	 * @param int a deciamal number
 	 */
 	decimalToHex(int) {
@@ -13,7 +12,6 @@ class Client extends eris.Client {
 		return '#000000'.substring(0, 7 - hex.length) + hex;
 	}
 	/**
-	 * 
 	 * @param guild the guild the commnd was ran in
 	 * @param search where to search for the member
 	 */
@@ -32,7 +30,6 @@ class Client extends eris.Client {
 		);
 	}
 	/**
-	 * 
 	 * @param client the client paramater
 	 * @param msg the message paramater
 	 * @param error the error causing it to break
