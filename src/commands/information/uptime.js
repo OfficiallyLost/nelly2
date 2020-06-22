@@ -3,7 +3,7 @@ require('moment-duration-format');
 
 module.exports = {
 	name: 'uptime',
-    description: 'view uptime',
+    description: 'view nellys uptime',
     aliases: [ 'up'],
 
 	execute: async (msg, args, client) => {
