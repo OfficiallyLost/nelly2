@@ -15,7 +15,7 @@ module.exports = {
 		};
 
 		let member = client.getMember(msg.channel.guild, args.join(' '));
-		let roles = member.roles.map((e) => msg.channel.guild.roles.get(e)).map((e) => e.mention).join(' ');
+		let roles = member.roles.map((e) => msg.channel.guild.roles.get(e)).map((e) => e.mention).sort((a, b) => b.position - a.position).map(r => `${r}`).join(', ');
 		if (!roles) roles = 'No roles';
 		let createdAt;
 		const joinPos =
@@ -56,24 +56,29 @@ module.exports = {
 							inline: true
 						},
 						{
-							name: 'Registered',
-							value: moment(member.createdAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
-							inline: true
-						},
-						{
-							name: 'Joined At',
-							value: moment(member.joineddAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
-							inline: true
-						},
-						{
 							name: 'Status',
 							value: status[member.status],
 							inline: true
 						},
 						{
+							name: '\u200b',
+							value: '\u200b',
+							inline: true
+						},
+						{
 							name: 'Join Position',
 							value: joinPos,
-							inline: true
+							inline: false
+						},
+						{
+							name: 'Joined At',
+							value: moment(member.joineddAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
+							inline: false
+						},
+						{
+							name: 'Registered',
+							value: moment(member.createdAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
+							inline: false
 						},
 						{
 							name: `Roles [${member.roles.length}]`,
@@ -99,24 +104,29 @@ module.exports = {
 							inline: true
 						},
 						{
-							name: 'Registered',
-							value: moment(member.createdAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
-							inline: true
-						},
-						{
-							name: 'Joined At',
-							value: moment(member.joineddAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
-							inline: true
-						},
-						{
 							name: 'Status',
-							value: status ? status[member.status] : 'Offline',
+							value: status[member.status],
+							inline: true
+						},
+						{
+							name: '\u200b',
+							value: '\u200b',
 							inline: true
 						},
 						{
 							name: 'Join Position',
 							value: joinPos,
-							inline: true
+							inline: false
+						},
+						{
+							name: 'Joined At',
+							value: moment(member.joineddAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
+							inline: false
+						},
+						{
+							name: 'Registered',
+							value: moment(member.createdAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
+							inline: false
 						},
 						{
 							name: `Roles [${member.roles.length}]`,
