@@ -2,6 +2,8 @@ module.exports = {
 	name: 'restart',
 	description: 'Restart',
 	aliases: [ 'r' ],
+	hidden: true,
+
 	execute: async (msg, client) => {
 		const process = require(`child_process`);
 		const channel = require('../../config/channels').bot;

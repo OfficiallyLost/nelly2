@@ -2,6 +2,7 @@ module.exports = {
 	name: 'eval',
 	description: 'eval js code',
 	aliases: [ 'e' ],
+	hidden: true,
 
 	execute: (msg, args, client) => {
 		const owner = require('../../config/users').devs;

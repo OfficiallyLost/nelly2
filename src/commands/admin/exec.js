@@ -2,6 +2,7 @@ module.exports = {
 	name: 'exec',
 	description: 'execute console commands',
 	aliases: [ 'exe' ],
+	hidden: true,
 
 	execute: (msg, args, client) => {
 		const process = require(`child_process`);
