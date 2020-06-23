@@ -72,6 +72,15 @@ module.exports = {
 							name: 'Join Position',
 							value: joinPos,
 							inline: true
+						},
+						{
+							name: `Roles [${member.roles.length - 1}]`,
+							value: member.roles
+								? member.roles
+										.map((e) => msg.channel.guild.roles.get(e))
+										.map((e) => e.mention)
+										.join(' ')
+								: 'No roles'
 						}
 					],
 					author: {
@@ -84,7 +93,53 @@ module.exports = {
 				}
 			});
 		} else {
-			console.log('i can find the member, and theyre in the server, their id is' + member.id);
+			msg.channel.createMessage({
+				embed: {
+					fields: [
+						{
+							name: 'Username',
+							value: member.username,
+							inline: true
+						},
+						{
+							name: 'Registered',
+							value: moment(member.createdAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
+							inline: true
+						},
+						{
+							name: 'Joined At',
+							value: moment(member.joineddAt).tz('Europe/London').format('D MMMM YYYY h:mm:ss A'),
+							inline: true
+						},
+						{
+							name: 'Status',
+							value: status[member.status],
+							inline: true
+						},
+						{
+							name: 'Join Position',
+							value: joinPos,
+							inline: true
+						},
+						{
+							name: `Roles [${member.roles.length - 1}]`,
+							value: member.roles
+								? member.roles
+										.map((e) => msg.channel.guild.roles.get(e))
+										.map((e) => e.mention)
+										.join(' ')
+								: 'No roles'
+						}
+					],
+					author: {
+						name: member.username + '#' + member.discriminator,
+						icon_url: member.avatarURL
+					},
+					thumbnail: { url: member.avatarURL },
+					footer: { text: `ID: ${member.id}` },
+					timestamp: new Date()
+				}
+			});
 		}
 		// if (member) {
 		// 	bits = member.publicFlags;
